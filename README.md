@@ -8,6 +8,12 @@
 $ yarn
 ```
 
+## generate CRUD
+
+```shell
+$ nest g res modelName
+```
+
 ## Running the app
 
 ```bash

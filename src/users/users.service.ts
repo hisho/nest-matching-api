@@ -1,26 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from '@src/users/dto/create-user.input';
 import { UpdateUserInput } from '@src/users/dto/update-user.input';
+import { User } from '@src/users/entities/user.entity';
 
 @Injectable()
 export class UsersService {
+  private users: User[] = [
+    {
+      id: 1,
+      name: 'Kotaro',
+    },
+    {
+      id: 2,
+      name: 'Ayaka',
+    },
+  ];
   create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+    const newUser: User = {
+      id: this.users.length + 1,
+      name: createUserInput.name,
+    };
+
+    this.users = [...this.users, newUser];
+
+    return newUser;
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.users;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.users.find((n) => n.id === id);
   }
 
   update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+    const targetUser = this.findOne(id);
+
+    targetUser.name = updateUserInput.name;
+
+    return targetUser;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    const targetUser = this.findOne(id);
+    this.users = this.users.filter((user) => user.id !== id);
+
+    return targetUser;
   }
 }

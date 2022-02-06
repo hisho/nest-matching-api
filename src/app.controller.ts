@@ -5,7 +5,7 @@ import { AppService } from '@src/app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('graphql')
+  @Get()
   getHello(): string {
     return this.appService.getHello();
   }

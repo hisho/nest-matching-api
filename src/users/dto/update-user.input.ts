@@ -1,8 +1,10 @@
 import { CreateUserInput } from '@src/users/dto/create-user.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { Field, InputType, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateUserInput extends PartialType(CreateUserInput) {
-  @Field(() => Int)
+  @Field(() => String, { description: 'Example field (placeholder)' })
+  name: string;
+  @Field(() => Int, { description: 'Example field (placeholder)' })
   id: number;
 }
